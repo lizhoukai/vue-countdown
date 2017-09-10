@@ -13,8 +13,17 @@
   position: relative;
   width: 245px;
   text-align: center;
+  &:after{
+    content: '';
+    position: absolute;
+    top: -35px;
+    left: 0;
+    height: 102px;
+    width: 1rpx;
+    background-color: #dedede;
+  }
   .active{
-    color: #c8b589;
+    color: #3d6dd8;
   }
   .wait{
     color: #94a3ae;
@@ -35,6 +44,10 @@ export default {
     waitText: {
       type: String,
       default: '重新获取'
+    },
+    disable: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -42,10 +55,16 @@ export default {
       timer: 0
     }
   },
+  watch: {
+    disable(v) {
+      if (v) {
+        this.timer = this.time
+        this.startTimer()
+      }
+    }
+  },
   methods: {
     run() {
-      this.timer = this.time
-      this.startTimer()
       this.$emit('run', '传给父组件')
     },
     startTimer() {
