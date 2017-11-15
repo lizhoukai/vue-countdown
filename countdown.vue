@@ -55,17 +55,14 @@ export default {
       timer: 0
     }
   },
-  watch: {
-    disable(v) {
-      if (v) {
-        this.timer = this.time
-        this.startTimer()
-      }
-    }
-  },
+  watch: {},
   methods: {
     run() {
       this.$emit('run', '传给父组件')
+    },
+    start() {
+      this.timer = this.time
+      this.startTimer()
     },
     startTimer() {
       this.timer--
